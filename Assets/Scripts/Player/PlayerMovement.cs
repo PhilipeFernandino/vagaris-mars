@@ -25,7 +25,8 @@ public class PlayerMovement : MonoBehaviour {
 
     float defaultJetpackGas;
     float timeSinceJump = 0f;
-    
+    float checkpointPriority = 0;
+
     bool jumpInput;
     bool jumpInputReleased;
     bool runInput = false;
@@ -57,6 +58,12 @@ public class PlayerMovement : MonoBehaviour {
 
     public void ResetPosition(InputAction.CallbackContext context) {
         if (context.started) transform.position = resetPosition.position;
+    }
+
+    public void Checkpoint(Transform checkpoint, int priority) {
+        if (checkpointPriority < priority) {
+            resetPosition = checkpoint;
+        }
     }
 
     #endregion
